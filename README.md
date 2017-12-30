@@ -49,3 +49,19 @@ Mutual TLS:
 ```
 kubectl apply -f install/kubernetes/istio-auth.yaml
 ```
+
+If you get 'uanbel to recognize... no matches' errors, run:
+```
+kubectl apply -f install/kubernetes/istio-customresources.yaml
+```
+
+Check that all CDRs are in place and don't have '<invalid>' reports:
+```
+kubectl get crd
+```
+
+If you want to automatically inject Istio sidecar to applications:
+>**Might need to enable this as Alpha Feature till later releases (https://kubernetes.io/docs/admin/extensible-admission-controllers/#enable-initializers-alpha-feature)**
+```
+kubectl apply -f install/kubernetes/istio-initializer.yaml
+```
