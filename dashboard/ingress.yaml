@@ -7,9 +7,10 @@ metadata:
    kubernetes.io/ingress.class: "istio"
 spec:
  rules:
+ - host: dashboard.k8s.evilcloud.xyz
  - http:
      paths:
-     - path: /dashboard
+     - path: /
        backend:
          serviceName: kubernetes-dashboard
          servicePort: 443
