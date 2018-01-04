@@ -121,7 +121,7 @@ Deploy daemon-set:
 
 ```
 curl https://raw.githubusercontent.com/kubernetes/contrib/master/keepalived-vip/vip-daemonset.yaml -o /tmp/vip-daemonset.yaml
-sed -i '/hostNetwork: true/a serviceAccount: kube-keepalived-vip' /tmp/vip-daemonset.yaml
+sed -i '/hostNetwork: true/a \      serviceAccount: kube-keepalived-vip' /tmp/vip-daemonset.yaml
 kubectl create -f /tmp/vip-daemonset.yaml
 ```
 
