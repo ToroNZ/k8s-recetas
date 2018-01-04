@@ -112,9 +112,17 @@ Public ----(example.com = 10.4.0.50)----|-----| Host IP: 10.4.0.3 |
                                               |___________________|
 ```
 
+Create account (sa):
+```
+kubectl create sa kube-keepalived-vip
+```
+
 Deploy daemon-set:
 
 ```
-kubectl create -f https://raw.githubusercontent.com/kubernetes/contrib/master/keepalived-vip/vip-daemonset.yaml
+wget https://raw.githubusercontent.com/kubernetes/contrib/master/keepalived-vip/vip-daemonset.yaml -o /tmp/vip-daemonset.yaml
+sed -i '/hostNetwork: true/a serviceAccount: kube-keepalived-vip' /tmp/vip-daemonset.yaml
+kubectl create -f /tmp/vip-daemonset.yaml
 ```
+
 
