@@ -65,3 +65,56 @@ If you want to automatically inject Istio sidecar to applications:
 ```
 kubectl apply -f install/kubernetes/istio-initializer.yaml
 ```
+
+## Load Balancer ##
+
+Because I'm poor, workaround the fact that we ain't got no fancy cloud doohickeys, so go ahead and deploy *keepalived* that acts as LB in a routable CIDR. More of a robust HA other than just DNS RR to each worker/HAproxy.
+
+From this:
+```
+                                                  ___________________
+                                                 |                   |
+                                           |-----| Host IP: 10.4.0.3 |
+                                           |     |___________________|
+                                           |
+                                           |      ___________________
+                                           |     |                   |
+Public ----(example.com = 10.4.0.3/4/5)----|-----| Host IP: 10.4.0.4 |
+                                           |     |___________________|
+                                           |
+                                           |      ___________________
+                                           |     |                   |
+                                           |-----| Host IP: 10.4.0.5 |
+                                                 |___________________|
+```
+
+To this:
+```
+                                               ___________________
+                                              |                   |
+                                              | VIP: 10.4.0.50    |
+                                        |-----| Host IP: 10.4.0.3 |
+                                        |     | Role: Master      |
+                                        |     |___________________|
+                                        |
+                                        |      ___________________
+                                        |     |                   |
+                                        |     | VIP: Unassigned   |
+Public ----(example.com = 10.4.0.50)----|-----| Host IP: 10.4.0.3 |
+                                        |     | Role: Slave       |
+                                        |     |___________________|
+                                        |
+                                        |      ___________________
+                                        |     |                   |
+                                        |     | VIP: Unassigned   |
+                                        |-----| Host IP: 10.4.0.3 |
+                                              | Role: Slave       |
+                                              |___________________|
+```
+
+Deploy daemon-set:
+
+```
+kubectl create -f https://raw.githubusercontent.com/kubernetes/contrib/master/keepalived-vip/vip-daemonset.yaml
+```
+
