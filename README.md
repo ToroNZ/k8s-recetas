@@ -117,6 +117,51 @@ Create account (sa):
 kubectl create sa kube-keepalived-vip
 ```
 
+Create ClusterRole (needs READ to pods, nodes, endpoints and services:
+
+```
+echo 'apiVersion: rbac.authorization.k8s.io/v1alpha1
+kind: ClusterRole
+metadata:
+  name: kube-keepalived-vip
+rules:
+- apiGroups: [""]
+  resources:
+  - pods
+  - nodes
+  - endpoints
+  - services
+  - configmaps
+  verbs: ["get", "list", "watch"]' | kubectl create -f -
+  ```
+  
+  Bind between ClusterRole and sa:
+  
+  ```
+  apiVersion: rbac.authorization.k8s.io/v1alpha1
+kind: ClusterRoleBinding
+metadata:
+  name: kube-keepalived-vip
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: kube-keepalived-vip
+subjects:
+- kind: ServiceAccount
+  name: kube-keepalived-vip
+  namespace: default
+```
+
+An an example, let's expose the kuberentes-dashboard:
+```
+echo "apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vip-configmap
+data:
+  192.168.2.155: kube-system/dashboard" | kubectl create -f -
+```
+
 Deploy daemon-set:
 
 ```
@@ -124,5 +169,4 @@ curl https://raw.githubusercontent.com/kubernetes/contrib/master/keepalived-vip/
 sed -i '/hostNetwork: true/a \      serviceAccount: kube-keepalived-vip' /tmp/vip-daemonset.yaml
 kubectl create -f /tmp/vip-daemonset.yaml
 ```
-
 
