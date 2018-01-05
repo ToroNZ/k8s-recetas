@@ -120,7 +120,7 @@ kubectl create sa kube-keepalived-vip
 Create ClusterRole (needs READ to pods, nodes, endpoints and services:
 
 ```
-echo 'apiVersion: rbac.authorization.k8s.io/v1alpha1
+echo 'apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: kube-keepalived-vip
@@ -138,7 +138,7 @@ rules:
   Bind between ClusterRole and sa:
   
   ```
-  apiVersion: rbac.authorization.k8s.io/v1alpha1
+echo 'apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: kube-keepalived-vip
@@ -149,7 +149,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: kube-keepalived-vip
-  namespace: default
+  namespace: default' | kubectl create -f -
 ```
 
 An an example, let's expose the kuberentes-dashboard:
@@ -169,4 +169,6 @@ curl https://raw.githubusercontent.com/kubernetes/contrib/master/keepalived-vip/
 sed -i '/hostNetwork: true/a \      serviceAccount: kube-keepalived-vip' /tmp/vip-daemonset.yaml
 kubectl create -f /tmp/vip-daemonset.yaml
 ```
+**Note: the DaemonSet yaml file contains a node selector. This is not required, is just an example to show how is possible to limit the nodes where keepalived can run (otherwise just label with ```kubectl label nodes --all type=worker```**
 
+Check that there is a 'keepalived-vip' pod running on each node.
