@@ -167,7 +167,7 @@ kind: ConfigMap
 metadata:
   name: vip-configmap
 data:
-  192.168.2.155: istio/istio-ingress" | kubectl create -f -
+  192.168.2.155: istio-system/istio-ingress" | kubectl create -f -
 ```
 
 Deploy daemon-set:
