@@ -160,14 +160,14 @@ subjects:
   namespace: default' | kubectl create -f -
 ```
 
-An an example, let's expose the kuberentes-dashboard:
+Next, let's expose the istio-ingress controller:
 ```
 echo "apiVersion: v1
 kind: ConfigMap
 metadata:
   name: vip-configmap
 data:
-  192.168.2.155: kube-system/dashboard" | kubectl create -f -
+  192.168.2.155: istio/istio-ingress" | kubectl create -f -
 ```
 
 Deploy daemon-set:
