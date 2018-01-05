@@ -76,7 +76,7 @@ kubectl apply -f install/kubernetes/addons/grafana.yaml
 
 ## Load Balancer ##
 
-Because I'm poor, workaround the fact that we ain't got no fancy cloud doohickeys, so go ahead and deploy *keepalived* that acts as LB in a routable CIDR. More of a robust HA other than just DNS RR to each worker/HAproxy.
+Because I'm poor, workaround the fact that we ain't got no fancy cloud doohickeys, so go ahead and deploy *keepalived* that acts as VIP in a routable CIDR. More of a robust HA other than just DNS RR to each worker/HAproxy.
 
 From this:
 ```
