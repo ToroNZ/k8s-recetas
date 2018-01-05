@@ -50,7 +50,7 @@ Mutual TLS:
 kubectl apply -f install/kubernetes/istio-auth.yaml
 ```
 
-If you get 'uanbel to recognize... no matches' errors, run:
+If you get 'unable to recognize...<>...no matches' errors, run:
 ```
 kubectl apply -f install/kubernetes/istio-customresources.yaml
 ```
@@ -64,7 +64,7 @@ If you want to automatically inject Istio sidecar to applications:
 ```
 kubectl apply -f install/kubernetes/istio-initializer.yaml
 ```
->**Depending on your kube config, you might need to enable this as Alpha Feature till later releases (https://kubernetes.io/docs/admin/extensible-admission-controllers/#enable-initializers-alpha-feature)**
+> **Depending on your kube config, you might need to enable this as Alpha Feature till later releases (https://kubernetes.io/docs/admin/extensible-admission-controllers/#enable-initializers-alpha-feature)**
 
 (Optional) Deploy Zipkin/Prometheus/ServiceGraph/Grfana:
 ```
