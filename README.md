@@ -61,9 +61,17 @@ kubectl get crd
 ```
 
 If you want to automatically inject Istio sidecar to applications:
->**Might need to enable this as Alpha Feature till later releases (https://kubernetes.io/docs/admin/extensible-admission-controllers/#enable-initializers-alpha-feature)**
 ```
 kubectl apply -f install/kubernetes/istio-initializer.yaml
+```
+>**Depending on your kube config, you might need to enable this as Alpha Feature till later releases (https://kubernetes.io/docs/admin/extensible-admission-controllers/#enable-initializers-alpha-feature)**
+
+(Optional) Deploy Zipkin/Prometheus/ServiceGraph/Grfana:
+```
+kubectl apply -f install/kubernetes/addons/zipkin.yaml
+kubectl apply -f install/kubernetes/addons/prometheus.yaml
+kubectl apply -f install/kubernetes/addons/servicegraph.yaml
+kubectl apply -f install/kubernetes/addons/grafana.yaml
 ```
 
 ## Load Balancer ##
