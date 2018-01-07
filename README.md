@@ -157,14 +157,14 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: kube-keepalived-vip
-  namespace: kube-system' | kubectl create -f -
+  namespace: default' | kubectl create -f -
 ```
 Deploy daemon-set:
 
 ```
-curl https://raw.githubusercontent.com/kubernetes/contrib/master/keepalived-vip/vip-daemonset.yaml -o /tmp/vip-daemonset.yaml
+curl https://raw.githubusercontent.com/aledbf/kube-keepalived-vip/master/vip-daemonset.yaml -o /tmp/vip-daemonset.yaml
 sed -i '/hostNetwork: true/a \      serviceAccount: kube-keepalived-vip' /tmp/vip-daemonset.yaml
-sed -i '4a\\  namespace: kube-system' /tmp/vip-daemonset.yaml
+sed -i '4a\\  namespace: default' /tmp/vip-daemonset.yaml
 kubectl create -f /tmp/vip-daemonset.yaml
 ```
 **Note: the DaemonSet yaml file contains a node selector. This is not required, is just an example to show how is possible to limit the nodes where keepalived can run (otherwise just label with ```kubectl label nodes --all type=worker```**
@@ -178,7 +178,7 @@ echo "apiVersion: v1
 kind: ConfigMap
 metadata:
   name: vip-configmap
-  namespace: kube-system
+  namespace: default
 data:" | kubectl create -f -
 ```
 
