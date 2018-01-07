@@ -141,11 +141,11 @@ rules:
   - services
   - configmaps
   verbs: ["get", "list", "watch"]' | kubectl create -f -
-  ```
+```
   
   Bind between ClusterRole and sa:
   
-  ```
+```
 echo 'apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
