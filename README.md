@@ -253,3 +253,10 @@ Deploy the sucker:
 kubectl apply -f /tmp/keepalived-cloud-provider.yaml
 ```
 
+** If you get RBAC errors is because this add-on runs with the 'default' account inside kube-system and needs super-powers. **
+So run:
+```
+kubectl create clusterrolebinding add-on-cluster-admin \
+  --clusterrole=cluster-admin \
+  --serviceaccount=kube-system:default
+```
