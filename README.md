@@ -182,6 +182,8 @@ metadata:
 data:" | kubectl create -f -
 ```
 
+## External Cloud Provider ##
+
 Add '--cloud-provider=external' to kube-controller-manager (systemd service).
 
 SSH into the controller/s and add ^ accordingly:
@@ -200,7 +202,7 @@ metadata:
   labels:
     app: keepalived-cloud-provider
   name: keepalived-cloud-provider
-  namespace: kube-system
+  namespace: default
 spec:
   replicas: 1
   revisionHistoryLimit: 2
@@ -223,7 +225,7 @@ spec:
         imagePullPolicy: IfNotPresent
         env:
         - name: KEEPALIVED_NAMESPACE
-          value: kube-system
+          value: default
         - name: KEEPALIVED_CONFIG_MAP
           value: vip-configmap
         - name: KEEPALIVED_SERVICE_CIDR
