@@ -165,6 +165,7 @@ Deploy daemon-set:
 curl https://raw.githubusercontent.com/aledbf/kube-keepalived-vip/master/vip-daemonset.yaml -o /tmp/vip-daemonset.yaml
 sed -i '/hostNetwork: true/a \      serviceAccount: kube-keepalived-vip' /tmp/vip-daemonset.yaml
 sed -i '4a\\  namespace: default' /tmp/vip-daemonset.yaml
+**sed -i '/args:/a \          - --watch-all-namespaces' /tmp/vip-daemonset.yaml** # Doesn't work with 'aledbf' image
 kubectl create -f /tmp/vip-daemonset.yaml
 ```
 **Note: the DaemonSet yaml file contains a node selector. This is not required, is just an example to show how is possible to limit the nodes where keepalived can run (otherwise just label with ```kubectl label nodes --all type=worker```**
