@@ -49,15 +49,9 @@ Mutual TLS:
 ```
 kubectl apply -f install/kubernetes/istio-auth.yaml
 ```
-
-If you get 'unable to recognize...<>...no matches' errors, run:
+If running k8s v1.9, changed the 'admissiontregistration' API from v1alpha1 to v1beta1:
 ```
-kubectl apply -f install/kubernetes/istio-customresources.yaml
-```
-
-Check that all CDRs are in place and don't have '<invalid>' reports:
-```
-kubectl get crd
+sed -i '%admissionregistration.k8s.io/v1alpha1%admissionregistration.k8s.io/v1beta1' install/kubernetes/istio-initializer.yaml
 ```
 
 If you want to automatically inject Istio sidecar to applications:
