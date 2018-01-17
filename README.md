@@ -7,6 +7,25 @@ Deploy the dashboard in the following way:
 ```
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
 ```
+
+Expose the dashboard:
+```
+echo "apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: speedtest
+  namespace: default
+spec:
+  rules:
+  - host: speedtest.k8s.evilcloud.xyz
+    http:
+      paths:
+      - backend:
+          serviceName: speedtest
+          servicePort: 8888
+        path: /
+" | kubectl create -f -
+```
 > **https://github.com/kubernetes/dashboard**
 
 ## Metrics ##
