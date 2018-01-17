@@ -51,6 +51,11 @@ Deploy DaemonSet (you can also use a pod deployment.. some pros and cons):
 kubectl apply -f https://raw.githubusercontent.com/containous/traefik/master/examples/k8s/traefik-ds.yaml
 ```
 
+Expose Traefik-ui dashboard:
+```
+kubectl apply -f https://gitlab.libre.nz/tomas/k8s-recetas/raw/master/traefik/web-ui.yaml
+```
+
 ## Heptio stuff ##
 
 Countour is an ingress controller leveraging Envoy:
