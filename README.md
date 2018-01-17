@@ -13,16 +13,16 @@ Expose the dashboard:
 echo "apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: speedtest
-  namespace: default
+  name: kube-dash
+  namespace: kube-system
 spec:
   rules:
-  - host: speedtest.k8s.evilcloud.xyz
+  - host: kube-dash.k8s.evilcloud.xyz
     http:
       paths:
       - backend:
-          serviceName: speedtest
-          servicePort: 8888
+          serviceName: kubernetes-dashboard
+          servicePort: 443
         path: /
 " | kubectl create -f -
 ```
