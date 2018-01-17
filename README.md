@@ -253,3 +253,11 @@ kubectl create clusterrolebinding add-on-cluster-admin \
   --clusterrole=cluster-admin \
   --serviceaccount=kube-system:default
 ```
+
+## Deploy Speedtest website ##
+
+```
+kubectl create -f https://raw.githubusercontent.com/ToroNZ/speedtest/docker/speedtest.yaml
+```
+
+Hit the URL specified at the bottom of ^ file... (speedtest.k8s.evilcloud.xyz ?)
