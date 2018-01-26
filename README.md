@@ -56,6 +56,8 @@ Expose Traefik-ui dashboard:
 kubectl apply -f https://gitlab.libre.nz/tomas/k8s-recetas/raw/master/traefik/web-ui.yaml
 ```
 
+
+
 ## Heptio stuff ##
 
 Countour is an ingress controller leveraging Envoy:
@@ -115,3 +117,7 @@ kubectl create -f https://raw.githubusercontent.com/ToroNZ/speedtest/docker/spee
 ```
 
 Hit the URL specified at the bottom of ^ file... (speedtest.k8s.evilcloud.xyz ?)
+
+## Install Helm ##
+
+
