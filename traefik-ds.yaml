@@ -72,7 +72,7 @@ spec:
         - --defaultentrypoints=http-redirect,https
         - --api
         - --configfile=/config/traefik.toml
-        volumes:
+      volumes:
         - name: config
           configMap:
             name: traefik-conf
