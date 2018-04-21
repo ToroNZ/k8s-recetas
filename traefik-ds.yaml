@@ -43,8 +43,8 @@ spec:
       terminationGracePeriodSeconds: 60
       hostNetwork: true
       containers:
-      - image: traefik
-        name: traefik-ingress-lb
+      - image: traefik:1.6.0-rc6-alpine
+        name: traefik
         ports:
         - name: http
           containerPort: 80
@@ -60,23 +60,17 @@ spec:
             - ALL
             add:
             - NET_BIND_SERVICE
-        volumeMounts:
-        - mountPath: "/ssl"
-          name: "ssl"
-        - mountPath: "/config"
-          name: "config"
         args:
-        - --api
-        - --kubernetes
+        - --web
+        - --web.metrics
+        - --web.metrics.prometheus
         - --logLevel=INFO
-        - --configfile=/config/traefik.toml
-      volumes:
-        - name: ssl
-          secret:
-            secretName: traefik-cert
-        - name: config
-          configMap:
-            name: traefik-conf
+        - --kubernetes
+        - --kubernetes.labelselector=kubernetes.io
+        - --entryPoints=Name:http-redirect Address::80 Redirect.EntryPoint:https
+        - --entryPoints=Name:https Address::443 TLS
+        - --defaultentrypoints=http-redirect,https
+        - --api
 ---
 kind: Service
 apiVersion: v1
