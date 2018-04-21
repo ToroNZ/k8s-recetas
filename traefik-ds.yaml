@@ -21,9 +21,6 @@ data:
       [entryPoints.https]
       address = ":443"
         [entryPoints.https.tls]
-          [[entryPoints.https.tls.certificates]]
-          CertFile = "/ssl/ingress.pem"
-          KeyFile = "/ssl/ingress-key.pem"
 ---
 kind: DaemonSet
 apiVersion: extensions/v1beta1
