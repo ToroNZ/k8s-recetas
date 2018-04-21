@@ -44,7 +44,7 @@ spec:
       hostNetwork: true
       containers:
       - image: traefik:1.6.0-rc6-alpine
-        name: traefik
+        name: traefik-ingress-lb
         ports:
         - name: http
           containerPort: 80
