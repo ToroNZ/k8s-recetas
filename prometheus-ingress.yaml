@@ -5,6 +5,7 @@ metadata:
   namespace: monitoring
   annotations:
     ingress.kubernetes.io/rewrite-target: "/"
+    kubernetes.io/ingress.class: traefik
 spec:
   rules:
   - host: prometheus-ui.minikube
