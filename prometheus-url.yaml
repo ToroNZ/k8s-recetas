@@ -1,0 +1,23 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: main
+spec:
+  replicas: 1
+  version: v1.7.1
+  externalUrl: https://prometheus-ui.minikube/prometheus
+  resources:
+    requests:
+      memory: 400Mi
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Alertmanager
+metadata:
+  name: main
+spec:
+  replicas: 3
+  version: v0.7.1
+  externalUrl: https://prometheus-ui.minikube/alertmanager
+  resources:
+    requests:
+      memory: 400Mi
