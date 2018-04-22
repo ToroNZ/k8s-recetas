@@ -41,12 +41,8 @@ spec:
             add:
             - NET_BIND_SERVICE
         args:
-        - --web
-        - --web.metrics
-        - --web.metrics.prometheus
         - --logLevel=INFO
         - --kubernetes
-        - --kubernetes.labelselector=kubernetes.io
         - --entryPoints=Name:web Address::80
         - --entryPoints=Name:tls Address::443 TLS
         - --defaultentrypoints=web,tls
