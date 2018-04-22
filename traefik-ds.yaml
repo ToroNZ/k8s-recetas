@@ -43,7 +43,7 @@ spec:
         args:
         - --logLevel=INFO
         - --kubernetes
-        - --entryPoints=Name:web Address::80
+        - --entryPoints=Name:web Address::80 Redirect.EntryPoint:tls
         - --entryPoints=Name:tls Address::443 TLS
         - --defaultentrypoints=web,tls
         - --api
