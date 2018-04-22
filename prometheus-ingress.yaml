@@ -2,6 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: monitoring
+  namespace: monitoring
   annotations:
     ingress.kubernetes.io/rewrite-target: "/"
 spec:
