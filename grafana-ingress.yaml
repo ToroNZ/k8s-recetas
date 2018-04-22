@@ -1,17 +1,15 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: grafana
+  name: grafana-dash
   namespace: grafana
   annotations:
     kubernetes.io/ingress.class: traefik
 spec:
   rules:
-  - host: grafana.minikube
-  - http:
+  - host: grafana-dash.minikube
+    http:
       paths:
       - backend:
           serviceName: grafana
           servicePort: 80
-  tls:
-   - secretName: grafana-ingress-tls-cert
