@@ -1,8 +1,8 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: monitoring
-  namespace: monitoring
+  name: prometheus
+  namespace: prometheus
   annotations:
     kubernetes.io/ingress.class: traefik
     traefik.frontend.rule.type: PathPrefixStrip
@@ -12,10 +12,14 @@ spec:
   - http:
       paths:
       - backend:
-          serviceName: prometheus-main
+          serviceName: prometheus-server
           servicePort: 9090
         path: /prometheus
       - backend:
-          serviceName: alertmanager-main
+          serviceName: prometheus-alertmanager
           servicePort: 9093
         path: /alertmanager
+      - backend:
+          serviceName: prometheus-pushgateway
+          servicePort: 9091
+        path: /pushgateway
