@@ -13,3 +13,5 @@ spec:
       - backend:
           serviceName: prometheus-server
           servicePort: 80
+  tls:
+   - secretName: prometheus-web-ingress-tls-cert
