@@ -19,3 +19,5 @@ spec:
           serviceName: prometheus-pushgateway
           servicePort: 9091
         path: /pushgateway
+  tls:
+   - secretName: prometheus-ingress-tls-cert
