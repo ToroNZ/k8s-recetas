@@ -26,10 +26,10 @@ spec:
       - image: traefik:1.6.0-rc6-alpine
         name: traefik-ingress-lb
         ports:
-        - name: http
+        - name: web
           containerPort: 80
           hostPort: 80
-        - name: https
+        - name: tls
           containerPort: 443
           hostPort: 443
         - name: admin
@@ -47,9 +47,9 @@ spec:
         - --logLevel=INFO
         - --kubernetes
         - --kubernetes.labelselector=kubernetes.io
-        - --entryPoints=Name:http Address::80
-        - --entryPoints=Name:https Address::443 TLS
-        - --defaultentrypoints=http,https
+        - --entryPoints=Name:web Address::80
+        - --entryPoints=Name:tls Address::443 TLS
+        - --defaultentrypoints=web,tls
         - --api
 ---
 kind: Service
@@ -63,10 +63,10 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      name: http
+      name: web
     - protocol: TCP
       port: 443
-      name: https
+      name: tls
     - protocol: TCP
       port: 8080
       name: admin
